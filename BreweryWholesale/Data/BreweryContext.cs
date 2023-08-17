@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BreweryWholesale.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace BreweryWholesale.Data
 {
@@ -8,5 +9,7 @@ namespace BreweryWholesale.Data
         {
 
         }
+        public DbSet<Brewery> Brewerys { get; set; }
+
     }
 }
