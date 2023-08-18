@@ -1,7 +1,6 @@
 ﻿using BreweryWholesale.Data;
 using BreweryWholesale.Data.Entities;
 using BreweryWholesale.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +29,27 @@ namespace BreweryWholesale.Controllers
 
             var beers = BeerDto.BeerDtos(brewery.Beers);
             return Ok(beers);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddBeer(int breweryId, BeerDto beerDto)
+        {
+            var brewery = await _context
+                .Brewerys
+                .Include(b => b.Beers)
+                .FirstOrDefaultAsync(b => b.Id == breweryId);
+
+            if (brewery == null)
+            {
+                return NotFound($"Brewery with id: {breweryId} we don't found.");
+            }
+
+            var beer = beerDto.ToBeer(brewery);
+            brewery.Beers.Add(beer);
+            await _context.SaveChangesAsync();
+            var uri = $"api/brewery/{breweryId}/beer/{beer.Id}";
+
+            return Created(uri, BeerDto.From(beer));
         }
     }
 }

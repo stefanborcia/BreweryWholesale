@@ -22,5 +22,15 @@ namespace BreweryWholesale.Models
                 };
             });
         }
+        internal Beer ToBeer(Brewery brewery)
+        {
+            return new Beer()
+            {
+                Name = Name,
+                AlcoholContent = AlcoholContent,
+                Price = Price,
+                Brewery = brewery
+            };
+        }
     }
 }
