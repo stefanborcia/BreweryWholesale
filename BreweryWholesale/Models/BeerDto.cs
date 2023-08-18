@@ -22,7 +22,7 @@ namespace BreweryWholesale.Models
                 };
             });
         }
-        internal Beer ToBeer(Brewery brewery)
+        internal Beer ToBeer(Brewery brewery) 
         {
             return new Beer()
             {
@@ -30,6 +30,16 @@ namespace BreweryWholesale.Models
                 AlcoholContent = AlcoholContent,
                 Price = Price,
                 Brewery = brewery
+            };
+        }
+        internal static BeerDto From(Beer beer)
+        {
+            return new BeerDto()
+            {
+                Id = beer.Id,
+                Name = beer.Name,
+                AlcoholContent = beer.AlcoholContent,
+                Price = beer.Price
             };
         }
     }

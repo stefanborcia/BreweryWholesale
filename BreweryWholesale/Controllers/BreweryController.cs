@@ -3,6 +3,7 @@ using BreweryWholesale.Data.Entities;
 using BreweryWholesale.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace BreweryWholesale.Controllers
 {
@@ -50,6 +51,25 @@ namespace BreweryWholesale.Controllers
             var uri = $"api/brewery/{breweryId}/beer/{beer.Id}";
 
             return Created(uri, BeerDto.From(beer));
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteBeer(int breweryId, int beerId)
+        {
+            var brewery = await _context
+                .Brewerys
+                .Include(b => b.Beers)
+                .FirstOrDefaultAsync(b => b.Id == breweryId);
+
+            var beer = brewery.Beers.FirstOrDefault(b => b.Id == beerId);
+            if (beer == null)
+            {
+                return NotFound($"The beer with id{beerId} doesn't exist.");
+            }
+
+            brewery.Beers.Remove(beer);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
     }
 }
