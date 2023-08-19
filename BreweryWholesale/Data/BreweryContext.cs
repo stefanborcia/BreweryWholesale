@@ -10,6 +10,7 @@ namespace BreweryWholesale.Data
 
         }
         public DbSet<Brewery> Brewerys { get; set; }
+        public DbSet<Wholesaler> Wholesalers { get; set; }
 
     }
 }
