@@ -16,6 +16,7 @@ namespace BreweryWholesale.Controllers
         {
             _context = context;
         }
+
         [HttpGet]
         public async Task<ActionResult<List<Brewery>>> GetAllBeers(int breweryId)
         {
@@ -29,6 +30,7 @@ namespace BreweryWholesale.Controllers
             }
 
             var beers = BeerDto.BeerDtos(brewery.Beers);
+
             return Ok(beers);
         }
 
@@ -69,6 +71,7 @@ namespace BreweryWholesale.Controllers
 
             brewery.Beers.Remove(beer);
             await _context.SaveChangesAsync();
+
             return NoContent();
         }
     }
