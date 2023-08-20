@@ -46,7 +46,7 @@ namespace BreweryWholesale.Migrations
 
                     b.HasIndex("BreweryId");
 
-                    b.ToTable("Beer");
+                    b.ToTable("Beer", (string)null);
                 });
 
             modelBuilder.Entity("BreweryWholesale.Data.Entities.Brewery", b =>
@@ -62,7 +62,7 @@ namespace BreweryWholesale.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brewerys");
+                    b.ToTable("Brewerys", (string)null);
                 });
 
             modelBuilder.Entity("BreweryWholesale.Data.Entities.Inventory", b =>
@@ -87,7 +87,7 @@ namespace BreweryWholesale.Migrations
 
                     b.HasIndex("WholesalerId");
 
-                    b.ToTable("Inventory");
+                    b.ToTable("Inventory", (string)null);
                 });
 
             modelBuilder.Entity("BreweryWholesale.Data.Entities.Wholesaler", b =>
@@ -104,7 +104,7 @@ namespace BreweryWholesale.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Wholesalers");
+                    b.ToTable("Wholesalers", (string)null);
                 });
 
             modelBuilder.Entity("BreweryWholesale.Data.Entities.Beer", b =>

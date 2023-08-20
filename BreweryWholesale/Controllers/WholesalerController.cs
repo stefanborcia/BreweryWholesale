@@ -49,5 +49,33 @@ namespace BreweryWholesale.Controllers
 
             return Ok(stringBuilder.ToString());
         }
+
+        [HttpPut]
+        [Route("{wholesalerId:int}/{beerId:int}")]
+        public async Task<ActionResult> UpdateStockCount(int wholesalerId, int beerId, [FromBody, Required] int count)
+        {
+            var wholesaler = await _context
+                .Wholesalers
+                .Include(w => w.InventoryItems)
+                .FirstOrDefaultAsync(w => w.Id == wholesalerId);
+
+            if (wholesaler == null)
+            {
+                return NotFound($"Wholesaler with id{wholesalerId} doesn't exist.");
+            }
+
+            var inventoryItem = wholesaler.InventoryItems.FirstOrDefault(i=>i.BeerId == beerId);
+
+            if (inventoryItem == null)
+            {
+                return NotFound($"Beer with id {beerId} doesn't exist.");
+            }
+
+            inventoryItem.Stock = count;
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }
