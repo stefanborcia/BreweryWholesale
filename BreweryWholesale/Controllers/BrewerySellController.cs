@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BreweryWholesale.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/brewery/{breweryId:int}/sell/{wholeSellerId:int}")]
     [ApiController]
     public class BrewerySellController : ControllerBase
     {
