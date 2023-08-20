@@ -9,6 +9,15 @@ namespace BreweryWholesale.Data
         {
 
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Inventory>(i =>
+            {
+                i.HasKey(x => new { x.BeerId, x.WholesalerId });
+            });
+        }
         public DbSet<Brewery> Brewerys { get; set; }
         public DbSet<Wholesaler> Wholesalers { get; set; }
 
