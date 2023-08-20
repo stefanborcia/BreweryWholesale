@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using BreweryWholesale.Data;
 using BreweryWholesale.Data.Entities;
+using BreweryWholesale.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
