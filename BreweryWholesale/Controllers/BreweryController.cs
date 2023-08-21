@@ -18,6 +18,8 @@ namespace BreweryWholesale.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<List<Brewery>>> GetAllBeers(int breweryId)
         {
             var brewery = await _context
@@ -35,6 +37,8 @@ namespace BreweryWholesale.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> AddBeer(int breweryId, BeerDto beerDto)
         {
             var brewery = await _context
@@ -56,6 +60,9 @@ namespace BreweryWholesale.Controllers
         }
 
         [HttpDelete]
+        [Route("{beerId:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteBeer(int breweryId, int beerId)
         {
             var brewery = await _context

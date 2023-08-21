@@ -21,6 +21,7 @@ namespace BreweryWholesale.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> AddWholesaler([FromBody, Required] string name)
         {
             var wholesaler = new Wholesaler() { Name = name };
@@ -30,6 +31,8 @@ namespace BreweryWholesale.Controllers
         }
         [HttpGet]
         [Route("{wholesalerId:int}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<Wholesaler>> GetWholesaler(int wholesalerId)
         {
             var wholesaler = await _context
@@ -53,6 +56,8 @@ namespace BreweryWholesale.Controllers
 
         [HttpPut]
         [Route("{wholesalerId:int}/{beerId:int}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> UpdateStockCount(int wholesalerId, int beerId, [FromBody, Required] int count)
         {
             var wholesaler = await _context
@@ -81,6 +86,8 @@ namespace BreweryWholesale.Controllers
 
         [HttpPost]
         [Route("{wholesalerId:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
 
         public async Task<ActionResult> GetQuotation(int wholesalerId, QuotationDto quotationDto)
         {

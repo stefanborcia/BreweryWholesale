@@ -18,6 +18,8 @@ namespace BreweryWholesale.Controllers
             _context = context;
         }
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> SellBeers(int breweryId, int wholesalerId, WholesalerBuyDto wholesalerBuyDto)
         {
             var wholesaler = await _context
@@ -48,7 +50,7 @@ namespace BreweryWholesale.Controllers
             if (notAvailableBeers.Any())
             {
                 return NotFound(
-                    $"Beers with id{{{string.Join(',', notAvailableBeers)}}} is not being sold by Brewery {breweryId}");
+                    $"Beers with id {{string.Join(',', notAvailableBeers)}} is not being sold by Brewery {breweryId}");
             }
 
             var beers = wholesalerBuyDto
