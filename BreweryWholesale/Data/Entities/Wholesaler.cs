@@ -1,10 +1,13 @@
-﻿namespace BreweryWholesale.Data.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BreweryWholesale.Data.Entities
 {
     public class Wholesaler
     {
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
-        public ICollection<Inventory> InventoryItems { get; set; }
+        public ICollection<Inventory>? InventoryItems { get; set; }
 
         public Wholesaler()
         {
