@@ -31,7 +31,7 @@ namespace BreweryWholesale.Controllers
             }
 
             var brewery = await _context
-                .Brewerys
+                .Breweries
                 .Include(b => b.Beers)
                 .FirstOrDefaultAsync(b => b.Id == breweryId);
 

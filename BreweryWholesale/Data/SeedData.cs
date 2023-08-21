@@ -6,11 +6,11 @@ namespace BreweryWholesale.Data
     {
         public static void AddData(BreweryContext context)
         {
-            if (!context.Brewerys.Any())
+            if (!context.Breweries.Any())
             {
-                var brewerys = GetBrewerys().ToList();
-                brewerys.ForEach(b=>b.Beers.Add(GetBeer(b)));
-                context.Brewerys.AddRange(brewerys);
+                var breweries = GetBreweries().ToList();
+                breweries.ForEach(b=>b.Beers.Add(GetBeer(b)));
+                context.Breweries.AddRange(breweries);
             }
 
             if (!context.Wholesalers.Any())
@@ -19,9 +19,10 @@ namespace BreweryWholesale.Data
                 wholesalers.ForEach(b=>b.InventoryItems.Add(GetInventory(b)));
                 context.Wholesalers.AddRange(wholesalers);
             }
+            context.SaveChanges();
         }
 
-        private static IEnumerable<Brewery> GetBrewerys()
+        private static IEnumerable<Brewery> GetBreweries()
         {
             return new List<Brewery>
             {

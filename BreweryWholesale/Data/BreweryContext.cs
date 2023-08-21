@@ -22,7 +22,7 @@ namespace BreweryWholesale.Data
             modelBuilder.Entity<Beer>().Property(p=>p.Price).HasPrecision(10, 2);
             modelBuilder.Entity<Inventory>().Property(p => p.Price).HasPrecision(10, 2);
         }
-        public DbSet<Brewery> Brewerys { get; set; }
+        public DbSet<Brewery> Breweries { get; set; }
         public DbSet<Wholesaler> Wholesalers { get; set; }
 
     }

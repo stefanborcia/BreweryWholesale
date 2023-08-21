@@ -21,7 +21,7 @@ namespace BreweryWholesale.Controllers
         public async Task<ActionResult<List<Brewery>>> GetAllBeers(int breweryId)
         {
             var brewery = await _context
-                .Brewerys
+                .Breweries
                 .Include(b=>b.Beers)
                 .FirstOrDefaultAsync(b=>b.Id == breweryId);
             if (brewery == null)
@@ -38,7 +38,7 @@ namespace BreweryWholesale.Controllers
         public async Task<ActionResult> AddBeer(int breweryId, BeerDto beerDto)
         {
             var brewery = await _context
-                .Brewerys
+                .Breweries
                 .Include(b => b.Beers)
                 .FirstOrDefaultAsync(b => b.Id == breweryId);
 
@@ -59,7 +59,7 @@ namespace BreweryWholesale.Controllers
         public async Task<ActionResult> DeleteBeer(int breweryId, int beerId)
         {
             var brewery = await _context
-                .Brewerys
+                .Breweries
                 .Include(b => b.Beers)
                 .FirstOrDefaultAsync(b => b.Id == breweryId);
 

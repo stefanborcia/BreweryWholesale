@@ -4,7 +4,6 @@
     {
         public IEnumerable<OrderItemDto> OrderItems { get; set; }
     }
-
     public record OrderItemDto
     {
         public int BeerId { get; set; }

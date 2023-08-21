@@ -7,5 +7,9 @@ namespace BreweryWholesale.Data.Entities
         public int Id { get; set; }
         public string? Name { get; set; }
         public virtual List<Beer> Beers { get; set; }
+        public Brewery()
+        {
+            Beers = new List<Beer>();
+        }
     }
 }
