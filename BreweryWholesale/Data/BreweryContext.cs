@@ -17,6 +17,10 @@ namespace BreweryWholesale.Data
             {
                 i.HasKey(x => new { x.BeerId, x.WholesalerId });
             });
+
+            modelBuilder.Entity<Beer>().Property(p => p.AlcoholContent).HasPrecision(10, 2);
+            modelBuilder.Entity<Beer>().Property(p=>p.Price).HasPrecision(10, 2);
+            modelBuilder.Entity<Inventory>().Property(p => p.Price).HasPrecision(10, 2);
         }
         public DbSet<Brewery> Brewerys { get; set; }
         public DbSet<Wholesaler> Wholesalers { get; set; }
