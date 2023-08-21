@@ -14,6 +14,14 @@ builder.Services.AddDbContext<BreweryContext>
 
 var app = builder.Build();
 
+// Create database based on the model and load initial data
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<BreweryContext>();
+    dbContext.Database.EnsureCreated();
+    SeedData.AddData(dbContext);
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
