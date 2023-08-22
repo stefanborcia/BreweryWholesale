@@ -107,7 +107,7 @@ namespace BreweryWholesale.Controllers
 
             var notSellingBeers = quotationDto
                 .QuotationItemDtos
-                .Where(q => wholesaler.InventoryItems.Any(i => i.BeerId == q.BeerId))
+                .Where(q => !wholesaler.InventoryItems.Any(i => i.BeerId == q.BeerId))
                 .Select(q => q.BeerId);
             if (notSellingBeers.Any())
             {

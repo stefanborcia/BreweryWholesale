@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace BreweryWholesale.Models
 {
     public record QuotationDto : IValidatableObject
     {
-        public IEnumerable<QuotationItemDto> QuotationItemDtos { get; set; } 
+        public IEnumerable<QuotationItemDto> QuotationItemDtos { get; set; } = null;
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -27,7 +28,9 @@ namespace BreweryWholesale.Models
 
     public record QuotationItemDto
     {
+        [SwaggerParameter("Beer Id to get Quotation")]
         public int BeerId { get; set; }
+        [SwaggerParameter("Quantity of Beer")]
         public int Quantity { get; set; }
     }
 }

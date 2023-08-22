@@ -1,12 +1,17 @@
 ﻿using BreweryWholesale.Data.Entities;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace BreweryWholesale.Models
 {
     public record BeerDto
     {
+        [SwaggerParameter("Beer Id")]
         public int Id { get; set; }
+        [SwaggerParameter("Beer Name")]
         public string Name { get; set; }
+        [SwaggerParameter("Alcohol Content (%)")]
         public decimal AlcoholContent { get; set; }
+        [SwaggerParameter("Beer Price")]
         public decimal Price { get; set; }
 
         public static IEnumerable<BeerDto> BeerDtos(IEnumerable<Beer> beers)
