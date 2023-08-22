@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using BreweryWholesale.Data.Entities;
@@ -35,6 +36,26 @@ namespace BreweryWholesale.Unit.Tests.DataTests.EntitiesTests
 
             dbBrewery!.Id.Should().BeGreaterOrEqualTo(1);
             dbBrewery.Name.Should().Be(brewery.Name);
+        }
+
+        [Fact]
+        public void Delete_Brewery_Should_Remove_From_Database()
+        {
+            var brewery = new Brewery()
+            {
+                Name = "Beer Factory"
+            };
+            _context.Breweries.Add(brewery);
+            _context.SaveChanges();
+
+            var dbBrewery = _context.Breweries.FirstOrDefault();
+
+            dbBrewery.Should().NotBeNull();
+            _context.Breweries.Remove(brewery);
+            _context.SaveChanges();
+
+            dbBrewery= _context.Breweries.FirstOrDefault();
+            dbBrewery.Should().BeNull();
         }
     }
 
