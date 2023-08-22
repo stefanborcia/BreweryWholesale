@@ -17,7 +17,7 @@ namespace BreweryWholesale.Unit.Tests.DataTests.EntitiesTests
         public BreweryTests()
         {
             var options = new DbContextOptionsBuilder<BreweryContext>()
-                .UseInMemoryDatabase(nameof(BreweryTests))
+                .UseInMemoryDatabase(nameof(BreweryTests) + DateTime.Now.Ticks)
                 .Options;
             _context = new BreweryContext(options);
         }
@@ -56,6 +56,27 @@ namespace BreweryWholesale.Unit.Tests.DataTests.EntitiesTests
 
             dbBrewery= _context.Breweries.FirstOrDefault();
             dbBrewery.Should().BeNull();
+        }
+
+        [Fact]
+        public void Update_Brewery_Should_Update_From_Database()
+        {
+            var brewery = new Brewery()
+            {
+                Name = "Beer Factory"
+            };
+
+            _context.Breweries.Add(brewery);
+            _context.SaveChanges();
+
+            var dbBrewery = _context.Breweries.FirstOrDefault();
+
+            dbBrewery.Should().NotBeNull();
+            dbBrewery!.Name = "Update name";
+            _context.SaveChanges();
+
+            dbBrewery=_context.Breweries.FirstOrDefault();
+            dbBrewery!.Name.Should().Be("Update name");
         }
     }
 
