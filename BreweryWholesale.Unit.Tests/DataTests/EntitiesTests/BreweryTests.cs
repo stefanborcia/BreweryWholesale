@@ -78,6 +78,39 @@ namespace BreweryWholesale.Unit.Tests.DataTests.EntitiesTests
             dbBrewery=_context.Breweries.FirstOrDefault();
             dbBrewery!.Name.Should().Be("Update name");
         }
+
+        [Fact]
+        public void Add_Brewery_With_Beers_Should_Add()
+        {
+            var brewery = new Brewery()
+            {
+                Name = "Beer Factory"
+            };
+            var beer = new Beer()
+            {
+                Name = "Duvel",
+                Price=2.5m,
+                AlcoholContent = 8.5m,
+                Brewery = brewery
+            };
+            brewery.Beers.Add(beer);
+
+            _context.Breweries.Add(brewery);
+            _context.SaveChanges();
+
+            var dbBrewery = _context
+                .Breweries
+                .Include(b => b.Beers)
+                .FirstOrDefault();
+
+          var dbBeer=dbBrewery.Beers.FirstOrDefault();
+          dbBeer.Should().NotBeNull();
+
+          dbBeer.Id.Should().BeGreaterOrEqualTo(1);
+          dbBeer.Name.Should().Be(beer.Name);
+          dbBeer.Price.Should().Be(beer.Price);
+          dbBeer.AlcoholContent.Should().Be(beer.AlcoholContent);
+        }
     }
 
 }
